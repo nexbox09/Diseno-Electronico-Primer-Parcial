@@ -1,0 +1,1397 @@
+
+ejemplo.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   000000c0  08000000  08000000  00010000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         00000818  080000c0  080000c0  000100c0  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       0000000c  080008d8  080008d8  000108d8  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .ARM.extab    00000000  080008e4  080008e4  0002004c  2**0
+                  CONTENTS
+  4 .ARM          00000000  080008e4  080008e4  0002004c  2**0
+                  CONTENTS
+  5 .preinit_array 00000000  080008e4  080008e4  0002004c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  080008e4  080008e4  000108e4  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .fini_array   00000004  080008e8  080008e8  000108e8  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .data         0000004c  20000000  080008ec  00020000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          00000028  2000004c  08000938  0002004c  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000604  20000074  08000938  00020074  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000028  00000000  00000000  0002004c  2**0
+                  CONTENTS, READONLY
+ 12 .comment      00000043  00000000  00000000  00020074  2**0
+                  CONTENTS, READONLY
+ 13 .debug_info   000004ab  00000000  00000000  000200b7  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_abbrev 000001da  00000000  00000000  00020562  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 15 .debug_aranges 00000070  00000000  00000000  00020740  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 16 .debug_rnglists 0000004c  00000000  00000000  000207b0  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 17 .debug_macro  00000fbe  00000000  00000000  000207fc  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 18 .debug_line   00000749  00000000  00000000  000217ba  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 19 .debug_str    00003f5f  00000000  00000000  00021f03  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 20 .debug_frame  0000011c  00000000  00000000  00025e64  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 21 .debug_line_str 0000003e  00000000  00000000  00025f80  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+Disassembly of section .text:
+
+080000c0 <__do_global_dtors_aux>:
+ 80000c0:	b510      	push	{r4, lr}
+ 80000c2:	4c06      	ldr	r4, [pc, #24]	; (80000dc <__do_global_dtors_aux+0x1c>)
+ 80000c4:	7823      	ldrb	r3, [r4, #0]
+ 80000c6:	2b00      	cmp	r3, #0
+ 80000c8:	d107      	bne.n	80000da <__do_global_dtors_aux+0x1a>
+ 80000ca:	4b05      	ldr	r3, [pc, #20]	; (80000e0 <__do_global_dtors_aux+0x20>)
+ 80000cc:	2b00      	cmp	r3, #0
+ 80000ce:	d002      	beq.n	80000d6 <__do_global_dtors_aux+0x16>
+ 80000d0:	4804      	ldr	r0, [pc, #16]	; (80000e4 <__do_global_dtors_aux+0x24>)
+ 80000d2:	e000      	b.n	80000d6 <__do_global_dtors_aux+0x16>
+ 80000d4:	bf00      	nop
+ 80000d6:	2301      	movs	r3, #1
+ 80000d8:	7023      	strb	r3, [r4, #0]
+ 80000da:	bd10      	pop	{r4, pc}
+ 80000dc:	2000004c 	.word	0x2000004c
+ 80000e0:	00000000 	.word	0x00000000
+ 80000e4:	080008c0 	.word	0x080008c0
+
+080000e8 <frame_dummy>:
+ 80000e8:	4b04      	ldr	r3, [pc, #16]	; (80000fc <frame_dummy+0x14>)
+ 80000ea:	b510      	push	{r4, lr}
+ 80000ec:	2b00      	cmp	r3, #0
+ 80000ee:	d003      	beq.n	80000f8 <frame_dummy+0x10>
+ 80000f0:	4903      	ldr	r1, [pc, #12]	; (8000100 <frame_dummy+0x18>)
+ 80000f2:	4804      	ldr	r0, [pc, #16]	; (8000104 <frame_dummy+0x1c>)
+ 80000f4:	e000      	b.n	80000f8 <frame_dummy+0x10>
+ 80000f6:	bf00      	nop
+ 80000f8:	bd10      	pop	{r4, pc}
+ 80000fa:	46c0      	nop			; (mov r8, r8)
+ 80000fc:	00000000 	.word	0x00000000
+ 8000100:	20000050 	.word	0x20000050
+ 8000104:	080008c0 	.word	0x080008c0
+
+08000108 <__udivsi3>:
+ 8000108:	2200      	movs	r2, #0
+ 800010a:	0843      	lsrs	r3, r0, #1
+ 800010c:	428b      	cmp	r3, r1
+ 800010e:	d374      	bcc.n	80001fa <__udivsi3+0xf2>
+ 8000110:	0903      	lsrs	r3, r0, #4
+ 8000112:	428b      	cmp	r3, r1
+ 8000114:	d35f      	bcc.n	80001d6 <__udivsi3+0xce>
+ 8000116:	0a03      	lsrs	r3, r0, #8
+ 8000118:	428b      	cmp	r3, r1
+ 800011a:	d344      	bcc.n	80001a6 <__udivsi3+0x9e>
+ 800011c:	0b03      	lsrs	r3, r0, #12
+ 800011e:	428b      	cmp	r3, r1
+ 8000120:	d328      	bcc.n	8000174 <__udivsi3+0x6c>
+ 8000122:	0c03      	lsrs	r3, r0, #16
+ 8000124:	428b      	cmp	r3, r1
+ 8000126:	d30d      	bcc.n	8000144 <__udivsi3+0x3c>
+ 8000128:	22ff      	movs	r2, #255	; 0xff
+ 800012a:	0209      	lsls	r1, r1, #8
+ 800012c:	ba12      	rev	r2, r2
+ 800012e:	0c03      	lsrs	r3, r0, #16
+ 8000130:	428b      	cmp	r3, r1
+ 8000132:	d302      	bcc.n	800013a <__udivsi3+0x32>
+ 8000134:	1212      	asrs	r2, r2, #8
+ 8000136:	0209      	lsls	r1, r1, #8
+ 8000138:	d065      	beq.n	8000206 <__udivsi3+0xfe>
+ 800013a:	0b03      	lsrs	r3, r0, #12
+ 800013c:	428b      	cmp	r3, r1
+ 800013e:	d319      	bcc.n	8000174 <__udivsi3+0x6c>
+ 8000140:	e000      	b.n	8000144 <__udivsi3+0x3c>
+ 8000142:	0a09      	lsrs	r1, r1, #8
+ 8000144:	0bc3      	lsrs	r3, r0, #15
+ 8000146:	428b      	cmp	r3, r1
+ 8000148:	d301      	bcc.n	800014e <__udivsi3+0x46>
+ 800014a:	03cb      	lsls	r3, r1, #15
+ 800014c:	1ac0      	subs	r0, r0, r3
+ 800014e:	4152      	adcs	r2, r2
+ 8000150:	0b83      	lsrs	r3, r0, #14
+ 8000152:	428b      	cmp	r3, r1
+ 8000154:	d301      	bcc.n	800015a <__udivsi3+0x52>
+ 8000156:	038b      	lsls	r3, r1, #14
+ 8000158:	1ac0      	subs	r0, r0, r3
+ 800015a:	4152      	adcs	r2, r2
+ 800015c:	0b43      	lsrs	r3, r0, #13
+ 800015e:	428b      	cmp	r3, r1
+ 8000160:	d301      	bcc.n	8000166 <__udivsi3+0x5e>
+ 8000162:	034b      	lsls	r3, r1, #13
+ 8000164:	1ac0      	subs	r0, r0, r3
+ 8000166:	4152      	adcs	r2, r2
+ 8000168:	0b03      	lsrs	r3, r0, #12
+ 800016a:	428b      	cmp	r3, r1
+ 800016c:	d301      	bcc.n	8000172 <__udivsi3+0x6a>
+ 800016e:	030b      	lsls	r3, r1, #12
+ 8000170:	1ac0      	subs	r0, r0, r3
+ 8000172:	4152      	adcs	r2, r2
+ 8000174:	0ac3      	lsrs	r3, r0, #11
+ 8000176:	428b      	cmp	r3, r1
+ 8000178:	d301      	bcc.n	800017e <__udivsi3+0x76>
+ 800017a:	02cb      	lsls	r3, r1, #11
+ 800017c:	1ac0      	subs	r0, r0, r3
+ 800017e:	4152      	adcs	r2, r2
+ 8000180:	0a83      	lsrs	r3, r0, #10
+ 8000182:	428b      	cmp	r3, r1
+ 8000184:	d301      	bcc.n	800018a <__udivsi3+0x82>
+ 8000186:	028b      	lsls	r3, r1, #10
+ 8000188:	1ac0      	subs	r0, r0, r3
+ 800018a:	4152      	adcs	r2, r2
+ 800018c:	0a43      	lsrs	r3, r0, #9
+ 800018e:	428b      	cmp	r3, r1
+ 8000190:	d301      	bcc.n	8000196 <__udivsi3+0x8e>
+ 8000192:	024b      	lsls	r3, r1, #9
+ 8000194:	1ac0      	subs	r0, r0, r3
+ 8000196:	4152      	adcs	r2, r2
+ 8000198:	0a03      	lsrs	r3, r0, #8
+ 800019a:	428b      	cmp	r3, r1
+ 800019c:	d301      	bcc.n	80001a2 <__udivsi3+0x9a>
+ 800019e:	020b      	lsls	r3, r1, #8
+ 80001a0:	1ac0      	subs	r0, r0, r3
+ 80001a2:	4152      	adcs	r2, r2
+ 80001a4:	d2cd      	bcs.n	8000142 <__udivsi3+0x3a>
+ 80001a6:	09c3      	lsrs	r3, r0, #7
+ 80001a8:	428b      	cmp	r3, r1
+ 80001aa:	d301      	bcc.n	80001b0 <__udivsi3+0xa8>
+ 80001ac:	01cb      	lsls	r3, r1, #7
+ 80001ae:	1ac0      	subs	r0, r0, r3
+ 80001b0:	4152      	adcs	r2, r2
+ 80001b2:	0983      	lsrs	r3, r0, #6
+ 80001b4:	428b      	cmp	r3, r1
+ 80001b6:	d301      	bcc.n	80001bc <__udivsi3+0xb4>
+ 80001b8:	018b      	lsls	r3, r1, #6
+ 80001ba:	1ac0      	subs	r0, r0, r3
+ 80001bc:	4152      	adcs	r2, r2
+ 80001be:	0943      	lsrs	r3, r0, #5
+ 80001c0:	428b      	cmp	r3, r1
+ 80001c2:	d301      	bcc.n	80001c8 <__udivsi3+0xc0>
+ 80001c4:	014b      	lsls	r3, r1, #5
+ 80001c6:	1ac0      	subs	r0, r0, r3
+ 80001c8:	4152      	adcs	r2, r2
+ 80001ca:	0903      	lsrs	r3, r0, #4
+ 80001cc:	428b      	cmp	r3, r1
+ 80001ce:	d301      	bcc.n	80001d4 <__udivsi3+0xcc>
+ 80001d0:	010b      	lsls	r3, r1, #4
+ 80001d2:	1ac0      	subs	r0, r0, r3
+ 80001d4:	4152      	adcs	r2, r2
+ 80001d6:	08c3      	lsrs	r3, r0, #3
+ 80001d8:	428b      	cmp	r3, r1
+ 80001da:	d301      	bcc.n	80001e0 <__udivsi3+0xd8>
+ 80001dc:	00cb      	lsls	r3, r1, #3
+ 80001de:	1ac0      	subs	r0, r0, r3
+ 80001e0:	4152      	adcs	r2, r2
+ 80001e2:	0883      	lsrs	r3, r0, #2
+ 80001e4:	428b      	cmp	r3, r1
+ 80001e6:	d301      	bcc.n	80001ec <__udivsi3+0xe4>
+ 80001e8:	008b      	lsls	r3, r1, #2
+ 80001ea:	1ac0      	subs	r0, r0, r3
+ 80001ec:	4152      	adcs	r2, r2
+ 80001ee:	0843      	lsrs	r3, r0, #1
+ 80001f0:	428b      	cmp	r3, r1
+ 80001f2:	d301      	bcc.n	80001f8 <__udivsi3+0xf0>
+ 80001f4:	004b      	lsls	r3, r1, #1
+ 80001f6:	1ac0      	subs	r0, r0, r3
+ 80001f8:	4152      	adcs	r2, r2
+ 80001fa:	1a41      	subs	r1, r0, r1
+ 80001fc:	d200      	bcs.n	8000200 <__udivsi3+0xf8>
+ 80001fe:	4601      	mov	r1, r0
+ 8000200:	4152      	adcs	r2, r2
+ 8000202:	4610      	mov	r0, r2
+ 8000204:	4770      	bx	lr
+ 8000206:	e7ff      	b.n	8000208 <__udivsi3+0x100>
+ 8000208:	b501      	push	{r0, lr}
+ 800020a:	2000      	movs	r0, #0
+ 800020c:	f000 f806 	bl	800021c <__aeabi_idiv0>
+ 8000210:	bd02      	pop	{r1, pc}
+ 8000212:	46c0      	nop			; (mov r8, r8)
+
+08000214 <__aeabi_uidivmod>:
+ 8000214:	2900      	cmp	r1, #0
+ 8000216:	d0f7      	beq.n	8000208 <__udivsi3+0x100>
+ 8000218:	e776      	b.n	8000108 <__udivsi3>
+ 800021a:	4770      	bx	lr
+
+0800021c <__aeabi_idiv0>:
+ 800021c:	4770      	bx	lr
+ 800021e:	46c0      	nop			; (mov r8, r8)
+
+08000220 <set_time>:
+
+// Array of decoded values for the digits 0-9
+const uint8_t decoder_table[] = {cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve};
+
+// Function to set the time on the watch. The time is broken down into decimal and unit parts for hours, minutes, and seconds.
+void set_time(uint8_t hour_decimal, uint8_t hour_unit, uint8_t minute_decimal, uint8_t minute_unit, uint8_t second_decimal, uint8_t second_unit) {
+ 8000220:	b5b0      	push	{r4, r5, r7, lr}
+ 8000222:	b082      	sub	sp, #8
+ 8000224:	af00      	add	r7, sp, #0
+ 8000226:	0005      	movs	r5, r0
+ 8000228:	000c      	movs	r4, r1
+ 800022a:	0010      	movs	r0, r2
+ 800022c:	0019      	movs	r1, r3
+ 800022e:	1dfb      	adds	r3, r7, #7
+ 8000230:	1c2a      	adds	r2, r5, #0
+ 8000232:	701a      	strb	r2, [r3, #0]
+ 8000234:	1dbb      	adds	r3, r7, #6
+ 8000236:	1c22      	adds	r2, r4, #0
+ 8000238:	701a      	strb	r2, [r3, #0]
+ 800023a:	1d7b      	adds	r3, r7, #5
+ 800023c:	1c02      	adds	r2, r0, #0
+ 800023e:	701a      	strb	r2, [r3, #0]
+ 8000240:	1d3b      	adds	r3, r7, #4
+ 8000242:	1c0a      	adds	r2, r1, #0
+ 8000244:	701a      	strb	r2, [r3, #0]
+    watch.hour_decimal = hour_decimal; // Set the decimal part of the hour
+ 8000246:	4b0f      	ldr	r3, [pc, #60]	; (8000284 <set_time+0x64>)
+ 8000248:	1dfa      	adds	r2, r7, #7
+ 800024a:	7812      	ldrb	r2, [r2, #0]
+ 800024c:	701a      	strb	r2, [r3, #0]
+    watch.hour_unit = hour_unit; // Set the unit part of the hour
+ 800024e:	4b0d      	ldr	r3, [pc, #52]	; (8000284 <set_time+0x64>)
+ 8000250:	1dba      	adds	r2, r7, #6
+ 8000252:	7812      	ldrb	r2, [r2, #0]
+ 8000254:	705a      	strb	r2, [r3, #1]
+    watch.minute_decimal = minute_decimal; // Set the decimal part of the minute
+ 8000256:	4b0b      	ldr	r3, [pc, #44]	; (8000284 <set_time+0x64>)
+ 8000258:	1d7a      	adds	r2, r7, #5
+ 800025a:	7812      	ldrb	r2, [r2, #0]
+ 800025c:	709a      	strb	r2, [r3, #2]
+    watch.minute_unit = minute_unit; // Set the unit part of the minute
+ 800025e:	4b09      	ldr	r3, [pc, #36]	; (8000284 <set_time+0x64>)
+ 8000260:	1d3a      	adds	r2, r7, #4
+ 8000262:	7812      	ldrb	r2, [r2, #0]
+ 8000264:	70da      	strb	r2, [r3, #3]
+    watch.second_decimal = second_decimal; // Set the decimal part of the second
+ 8000266:	4a07      	ldr	r2, [pc, #28]	; (8000284 <set_time+0x64>)
+ 8000268:	2318      	movs	r3, #24
+ 800026a:	18fb      	adds	r3, r7, r3
+ 800026c:	781b      	ldrb	r3, [r3, #0]
+ 800026e:	7113      	strb	r3, [r2, #4]
+    watch.second_unit = second_unit; // Set the unit part of the second
+ 8000270:	4b04      	ldr	r3, [pc, #16]	; (8000284 <set_time+0x64>)
+ 8000272:	221c      	movs	r2, #28
+ 8000274:	18ba      	adds	r2, r7, r2
+ 8000276:	7812      	ldrb	r2, [r2, #0]
+ 8000278:	715a      	strb	r2, [r3, #5]
+}
+ 800027a:	46c0      	nop			; (mov r8, r8)
+ 800027c:	46bd      	mov	sp, r7
+ 800027e:	b002      	add	sp, #8
+ 8000280:	bdb0      	pop	{r4, r5, r7, pc}
+ 8000282:	46c0      	nop			; (mov r8, r8)
+ 8000284:	2000006c 	.word	0x2000006c
+
+08000288 <actualizarValoresEstados>:
+    {0X01 << 7, decoder, 0}, // Valor se actualizará en runtime
+    {0X01 << 4, decoder, 0}  // Valor se actualizará en runtime
+};
+
+// Función para actualizar los valores en runtime antes de usar el arreglo
+void actualizarValoresEstados() {
+ 8000288:	b580      	push	{r7, lr}
+ 800028a:	af00      	add	r7, sp, #0
+    estados[0].valor = watch.second_unit;
+ 800028c:	4b12      	ldr	r3, [pc, #72]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 800028e:	795a      	ldrb	r2, [r3, #5]
+ 8000290:	4b12      	ldr	r3, [pc, #72]	; (80002dc <actualizarValoresEstados+0x54>)
+ 8000292:	721a      	strb	r2, [r3, #8]
+    estados[1].valor = watch.second_decimal;
+ 8000294:	4b10      	ldr	r3, [pc, #64]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 8000296:	791a      	ldrb	r2, [r3, #4]
+ 8000298:	4b10      	ldr	r3, [pc, #64]	; (80002dc <actualizarValoresEstados+0x54>)
+ 800029a:	751a      	strb	r2, [r3, #20]
+    estados[2].valor = watch.minute_unit;
+ 800029c:	4b0e      	ldr	r3, [pc, #56]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 800029e:	78d9      	ldrb	r1, [r3, #3]
+ 80002a0:	4b0e      	ldr	r3, [pc, #56]	; (80002dc <actualizarValoresEstados+0x54>)
+ 80002a2:	2220      	movs	r2, #32
+ 80002a4:	5499      	strb	r1, [r3, r2]
+    estados[3].valor = watch.minute_decimal;
+ 80002a6:	4b0c      	ldr	r3, [pc, #48]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 80002a8:	7899      	ldrb	r1, [r3, #2]
+ 80002aa:	4b0c      	ldr	r3, [pc, #48]	; (80002dc <actualizarValoresEstados+0x54>)
+ 80002ac:	222c      	movs	r2, #44	; 0x2c
+ 80002ae:	5499      	strb	r1, [r3, r2]
+    estados[4].valor = watch.hour_unit % 10;
+ 80002b0:	4b09      	ldr	r3, [pc, #36]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 80002b2:	785b      	ldrb	r3, [r3, #1]
+ 80002b4:	210a      	movs	r1, #10
+ 80002b6:	0018      	movs	r0, r3
+ 80002b8:	f7ff ffac 	bl	8000214 <__aeabi_uidivmod>
+ 80002bc:	000b      	movs	r3, r1
+ 80002be:	b2d9      	uxtb	r1, r3
+ 80002c0:	4b06      	ldr	r3, [pc, #24]	; (80002dc <actualizarValoresEstados+0x54>)
+ 80002c2:	2238      	movs	r2, #56	; 0x38
+ 80002c4:	5499      	strb	r1, [r3, r2]
+    estados[5].valor = watch.hour_decimal;
+ 80002c6:	4b04      	ldr	r3, [pc, #16]	; (80002d8 <actualizarValoresEstados+0x50>)
+ 80002c8:	7819      	ldrb	r1, [r3, #0]
+ 80002ca:	4b04      	ldr	r3, [pc, #16]	; (80002dc <actualizarValoresEstados+0x54>)
+ 80002cc:	2244      	movs	r2, #68	; 0x44
+ 80002ce:	5499      	strb	r1, [r3, r2]
+}
+ 80002d0:	46c0      	nop			; (mov r8, r8)
+ 80002d2:	46bd      	mov	sp, r7
+ 80002d4:	bd80      	pop	{r7, pc}
+ 80002d6:	46c0      	nop			; (mov r8, r8)
+ 80002d8:	2000006c 	.word	0x2000006c
+ 80002dc:	20000004 	.word	0x20000004
+
+080002e0 <main>:
+
+int main(void)
+{
+ 80002e0:	b5b0      	push	{r4, r5, r7, lr}
+ 80002e2:	b088      	sub	sp, #32
+ 80002e4:	af02      	add	r7, sp, #8
+    //Initialize the clock for the GPIOA, GPIOB, and GPIOC peripherals
+    RCC->IOPENR |= (1 << 2) | (1 << 1) | (1 << 0);
+ 80002e6:	4bc0      	ldr	r3, [pc, #768]	; (80005e8 <main+0x308>)
+ 80002e8:	6ada      	ldr	r2, [r3, #44]	; 0x2c
+ 80002ea:	4bbf      	ldr	r3, [pc, #764]	; (80005e8 <main+0x308>)
+ 80002ec:	2107      	movs	r1, #7
+ 80002ee:	430a      	orrs	r2, r1
+ 80002f0:	62da      	str	r2, [r3, #44]	; 0x2c
+        
+    //create a a¿mask to set the pins as output in the GPIOC 
+    uint32_t portC_masks = (0b01 << 8) |(0b01 << 10) | (0b01 << 12) | (0b01 << 14) | (0b01 << 16) | (0b01 << 18);
+ 80002f2:	4bbe      	ldr	r3, [pc, #760]	; (80005ec <main+0x30c>)
+ 80002f4:	613b      	str	r3, [r7, #16]
+
+    //Restart the MODER register to set the pins as output
+    GPIOC->MODER &= ~(0b11 << 8 | 0b11 << 10 | 0b11 << 12 | 0b11 << 14 | 0b11 << 16 | 0b11 << 18);
+ 80002f6:	4bbe      	ldr	r3, [pc, #760]	; (80005f0 <main+0x310>)
+ 80002f8:	681a      	ldr	r2, [r3, #0]
+ 80002fa:	4bbd      	ldr	r3, [pc, #756]	; (80005f0 <main+0x310>)
+ 80002fc:	49bd      	ldr	r1, [pc, #756]	; (80005f4 <main+0x314>)
+ 80002fe:	400a      	ands	r2, r1
+ 8000300:	601a      	str	r2, [r3, #0]
+    GPIOC->MODER |= portC_masks;
+ 8000302:	4bbb      	ldr	r3, [pc, #748]	; (80005f0 <main+0x310>)
+ 8000304:	6819      	ldr	r1, [r3, #0]
+ 8000306:	4bba      	ldr	r3, [pc, #744]	; (80005f0 <main+0x310>)
+ 8000308:	693a      	ldr	r2, [r7, #16]
+ 800030a:	430a      	orrs	r2, r1
+ 800030c:	601a      	str	r2, [r3, #0]
+
+    //Create a bitmask to set the pins as output in the GPIOB
+    uint32_t portB_masks = (0b01 << 0) | (0b01 << 2) | (0b01 << 4) | (0b01 << 6) |
+ 800030e:	4bba      	ldr	r3, [pc, #744]	; (80005f8 <main+0x318>)
+ 8000310:	60fb      	str	r3, [r7, #12]
+                           (0b01 << 8) | (0b01 << 10) | (0b01 << 12) | (0b01 << 14);
+    
+    //Restart the MODER register to set the pins as output
+    GPIOB->MODER &= ~(0xFFFF); 
+ 8000312:	4bba      	ldr	r3, [pc, #744]	; (80005fc <main+0x31c>)
+ 8000314:	681a      	ldr	r2, [r3, #0]
+ 8000316:	4bb9      	ldr	r3, [pc, #740]	; (80005fc <main+0x31c>)
+ 8000318:	0c12      	lsrs	r2, r2, #16
+ 800031a:	0412      	lsls	r2, r2, #16
+ 800031c:	601a      	str	r2, [r3, #0]
+    GPIOB->MODER |= portB_masks;
+ 800031e:	4bb7      	ldr	r3, [pc, #732]	; (80005fc <main+0x31c>)
+ 8000320:	6819      	ldr	r1, [r3, #0]
+ 8000322:	4bb6      	ldr	r3, [pc, #728]	; (80005fc <main+0x31c>)
+ 8000324:	68fa      	ldr	r2, [r7, #12]
+ 8000326:	430a      	orrs	r2, r1
+ 8000328:	601a      	str	r2, [r3, #0]
+
+    //Create a bitmask to set the pins as input in the GPIOC for the buttons PC13 and PC3
+    uint32_t portC_masks_input = (0b00 << 26) | (0b00 << 6) | (0b00 << 20) | (0b00 << 24); //Pines PC13,PC3, PC10 Y PC12 como entrada
+ 800032a:	2300      	movs	r3, #0
+ 800032c:	60bb      	str	r3, [r7, #8]
+
+    GPIOC->MODER &= ~(0b11 << 26) ; 
+ 800032e:	4bb0      	ldr	r3, [pc, #704]	; (80005f0 <main+0x310>)
+ 8000330:	681a      	ldr	r2, [r3, #0]
+ 8000332:	4baf      	ldr	r3, [pc, #700]	; (80005f0 <main+0x310>)
+ 8000334:	49b2      	ldr	r1, [pc, #712]	; (8000600 <main+0x320>)
+ 8000336:	400a      	ands	r2, r1
+ 8000338:	601a      	str	r2, [r3, #0]
+    GPIOC->MODER &= ~(0b11 << 6);
+ 800033a:	4bad      	ldr	r3, [pc, #692]	; (80005f0 <main+0x310>)
+ 800033c:	681a      	ldr	r2, [r3, #0]
+ 800033e:	4bac      	ldr	r3, [pc, #688]	; (80005f0 <main+0x310>)
+ 8000340:	21c0      	movs	r1, #192	; 0xc0
+ 8000342:	438a      	bics	r2, r1
+ 8000344:	601a      	str	r2, [r3, #0]
+    GPIOC->MODER &= ~(0b11 << 24);
+ 8000346:	4baa      	ldr	r3, [pc, #680]	; (80005f0 <main+0x310>)
+ 8000348:	681a      	ldr	r2, [r3, #0]
+ 800034a:	4ba9      	ldr	r3, [pc, #676]	; (80005f0 <main+0x310>)
+ 800034c:	49ad      	ldr	r1, [pc, #692]	; (8000604 <main+0x324>)
+ 800034e:	400a      	ands	r2, r1
+ 8000350:	601a      	str	r2, [r3, #0]
+    GPIOC->MODER &= ~(0b11 << 20); 
+ 8000352:	4ba7      	ldr	r3, [pc, #668]	; (80005f0 <main+0x310>)
+ 8000354:	681a      	ldr	r2, [r3, #0]
+ 8000356:	4ba6      	ldr	r3, [pc, #664]	; (80005f0 <main+0x310>)
+ 8000358:	49ab      	ldr	r1, [pc, #684]	; (8000608 <main+0x328>)
+ 800035a:	400a      	ands	r2, r1
+ 800035c:	601a      	str	r2, [r3, #0]
+    GPIOC->MODER |= portC_masks_input;
+ 800035e:	4ba4      	ldr	r3, [pc, #656]	; (80005f0 <main+0x310>)
+ 8000360:	6819      	ldr	r1, [r3, #0]
+ 8000362:	4ba3      	ldr	r3, [pc, #652]	; (80005f0 <main+0x310>)
+ 8000364:	68ba      	ldr	r2, [r7, #8]
+ 8000366:	430a      	orrs	r2, r1
+ 8000368:	601a      	str	r2, [r3, #0]
+
+    //Create a bitmask to set the pins as input in the GPIOA for the buttons PA0 and PA10
+    uint32_t portA_masks_input = (0b00 << 20) | (0b00 << 0); // PA10 como entrada y PA0 como entrada
+ 800036a:	2300      	movs	r3, #0
+ 800036c:	607b      	str	r3, [r7, #4]
+
+    GPIOA->MODER &= ~(0b11 << 20); 
+ 800036e:	23a0      	movs	r3, #160	; 0xa0
+ 8000370:	05db      	lsls	r3, r3, #23
+ 8000372:	681a      	ldr	r2, [r3, #0]
+ 8000374:	23a0      	movs	r3, #160	; 0xa0
+ 8000376:	05db      	lsls	r3, r3, #23
+ 8000378:	49a3      	ldr	r1, [pc, #652]	; (8000608 <main+0x328>)
+ 800037a:	400a      	ands	r2, r1
+ 800037c:	601a      	str	r2, [r3, #0]
+    GPIOA->MODER &= ~(0b11 << 0);  
+ 800037e:	23a0      	movs	r3, #160	; 0xa0
+ 8000380:	05db      	lsls	r3, r3, #23
+ 8000382:	681a      	ldr	r2, [r3, #0]
+ 8000384:	23a0      	movs	r3, #160	; 0xa0
+ 8000386:	05db      	lsls	r3, r3, #23
+ 8000388:	2103      	movs	r1, #3
+ 800038a:	438a      	bics	r2, r1
+ 800038c:	601a      	str	r2, [r3, #0]
+    GPIOA->MODER |= portA_masks_input; 
+ 800038e:	23a0      	movs	r3, #160	; 0xa0
+ 8000390:	05db      	lsls	r3, r3, #23
+ 8000392:	6819      	ldr	r1, [r3, #0]
+ 8000394:	23a0      	movs	r3, #160	; 0xa0
+ 8000396:	05db      	lsls	r3, r3, #23
+ 8000398:	687a      	ldr	r2, [r7, #4]
+ 800039a:	430a      	orrs	r2, r1
+ 800039c:	601a      	str	r2, [r3, #0]
+
+    // Set the time to 12:00:00 as given in the problem statement 
+    set_time(0, 0, 0, 0, 0, 0);
+ 800039e:	2300      	movs	r3, #0
+ 80003a0:	9301      	str	r3, [sp, #4]
+ 80003a2:	2300      	movs	r3, #0
+ 80003a4:	9300      	str	r3, [sp, #0]
+ 80003a6:	2300      	movs	r3, #0
+ 80003a8:	2200      	movs	r2, #0
+ 80003aa:	2100      	movs	r1, #0
+ 80003ac:	2000      	movs	r0, #0
+ 80003ae:	f7ff ff37 	bl	8000220 <set_time>
+    while (1)
+    {
+        // This function checks if the button connected to pin PCA10 is pressed. If the button is pressed
+        // it toggles the time format between 12-hour and 24-hour. It also performs debouncing by adding
+        // a delay of 100 milliseconds.
+        if ((GPIOA->IDR & (1 << 10)) == 0) 
+ 80003b2:	23a0      	movs	r3, #160	; 0xa0
+ 80003b4:	05db      	lsls	r3, r3, #23
+ 80003b6:	691a      	ldr	r2, [r3, #16]
+ 80003b8:	2380      	movs	r3, #128	; 0x80
+ 80003ba:	00db      	lsls	r3, r3, #3
+ 80003bc:	4013      	ands	r3, r2
+ 80003be:	d163      	bne.n	8000488 <main+0x1a8>
+{
+    uint8_t temp_hour = watch.hour_decimal * 10 + watch.hour_unit;
+ 80003c0:	4b92      	ldr	r3, [pc, #584]	; (800060c <main+0x32c>)
+ 80003c2:	781b      	ldrb	r3, [r3, #0]
+ 80003c4:	1c1a      	adds	r2, r3, #0
+ 80003c6:	0092      	lsls	r2, r2, #2
+ 80003c8:	18d3      	adds	r3, r2, r3
+ 80003ca:	18db      	adds	r3, r3, r3
+ 80003cc:	b2d9      	uxtb	r1, r3
+ 80003ce:	4b8f      	ldr	r3, [pc, #572]	; (800060c <main+0x32c>)
+ 80003d0:	785a      	ldrb	r2, [r3, #1]
+ 80003d2:	2017      	movs	r0, #23
+ 80003d4:	183b      	adds	r3, r7, r0
+ 80003d6:	188a      	adds	r2, r1, r2
+ 80003d8:	701a      	strb	r2, [r3, #0]
+    
+    // Convertir directamente entre formatos 24 y 12 horas sin pasos intermedios redundantes
+    if (formato_24_horas) // Si actualmente está en formato 24 horas
+ 80003da:	4b8d      	ldr	r3, [pc, #564]	; (8000610 <main+0x330>)
+ 80003dc:	781b      	ldrb	r3, [r3, #0]
+ 80003de:	2b00      	cmp	r3, #0
+ 80003e0:	d012      	beq.n	8000408 <main+0x128>
+    {
+        if (temp_hour == 0) temp_hour = 12; // Medianoche en formato 12 horas
+ 80003e2:	183b      	adds	r3, r7, r0
+ 80003e4:	781b      	ldrb	r3, [r3, #0]
+ 80003e6:	2b00      	cmp	r3, #0
+ 80003e8:	d103      	bne.n	80003f2 <main+0x112>
+ 80003ea:	183b      	adds	r3, r7, r0
+ 80003ec:	220c      	movs	r2, #12
+ 80003ee:	701a      	strb	r2, [r3, #0]
+ 80003f0:	e01f      	b.n	8000432 <main+0x152>
+        else if (temp_hour > 12) temp_hour -= 12; // Convertir a formato PM
+ 80003f2:	2217      	movs	r2, #23
+ 80003f4:	18bb      	adds	r3, r7, r2
+ 80003f6:	781b      	ldrb	r3, [r3, #0]
+ 80003f8:	2b0c      	cmp	r3, #12
+ 80003fa:	d91a      	bls.n	8000432 <main+0x152>
+ 80003fc:	18bb      	adds	r3, r7, r2
+ 80003fe:	18ba      	adds	r2, r7, r2
+ 8000400:	7812      	ldrb	r2, [r2, #0]
+ 8000402:	3a0c      	subs	r2, #12
+ 8000404:	701a      	strb	r2, [r3, #0]
+ 8000406:	e014      	b.n	8000432 <main+0x152>
+    }
+    else // Si actualmente está en formato 12 horas
+    {
+        if (temp_hour == 12) temp_hour = 0; // Mediodía en formato 24 horas
+ 8000408:	2217      	movs	r2, #23
+ 800040a:	18bb      	adds	r3, r7, r2
+ 800040c:	781b      	ldrb	r3, [r3, #0]
+ 800040e:	2b0c      	cmp	r3, #12
+ 8000410:	d103      	bne.n	800041a <main+0x13a>
+ 8000412:	18bb      	adds	r3, r7, r2
+ 8000414:	2200      	movs	r2, #0
+ 8000416:	701a      	strb	r2, [r3, #0]
+ 8000418:	e00b      	b.n	8000432 <main+0x152>
+        else temp_hour = (temp_hour % 12) + 12; // Convertir a formato 24 horas, ajustando las horas PM correctamente
+ 800041a:	2417      	movs	r4, #23
+ 800041c:	193b      	adds	r3, r7, r4
+ 800041e:	781b      	ldrb	r3, [r3, #0]
+ 8000420:	210c      	movs	r1, #12
+ 8000422:	0018      	movs	r0, r3
+ 8000424:	f7ff fef6 	bl	8000214 <__aeabi_uidivmod>
+ 8000428:	000b      	movs	r3, r1
+ 800042a:	b2da      	uxtb	r2, r3
+ 800042c:	193b      	adds	r3, r7, r4
+ 800042e:	320c      	adds	r2, #12
+ 8000430:	701a      	strb	r2, [r3, #0]
+    }
+
+    set_time(temp_hour / 10, temp_hour % 10, watch.minute_decimal, watch.minute_unit, watch.second_decimal, watch.second_unit);
+ 8000432:	2517      	movs	r5, #23
+ 8000434:	197b      	adds	r3, r7, r5
+ 8000436:	781b      	ldrb	r3, [r3, #0]
+ 8000438:	210a      	movs	r1, #10
+ 800043a:	0018      	movs	r0, r3
+ 800043c:	f7ff fe64 	bl	8000108 <__udivsi3>
+ 8000440:	0003      	movs	r3, r0
+ 8000442:	b2dc      	uxtb	r4, r3
+ 8000444:	197b      	adds	r3, r7, r5
+ 8000446:	781b      	ldrb	r3, [r3, #0]
+ 8000448:	210a      	movs	r1, #10
+ 800044a:	0018      	movs	r0, r3
+ 800044c:	f7ff fee2 	bl	8000214 <__aeabi_uidivmod>
+ 8000450:	000b      	movs	r3, r1
+ 8000452:	b2d9      	uxtb	r1, r3
+ 8000454:	4b6d      	ldr	r3, [pc, #436]	; (800060c <main+0x32c>)
+ 8000456:	7898      	ldrb	r0, [r3, #2]
+ 8000458:	4b6c      	ldr	r3, [pc, #432]	; (800060c <main+0x32c>)
+ 800045a:	78dd      	ldrb	r5, [r3, #3]
+ 800045c:	4b6b      	ldr	r3, [pc, #428]	; (800060c <main+0x32c>)
+ 800045e:	791b      	ldrb	r3, [r3, #4]
+ 8000460:	4a6a      	ldr	r2, [pc, #424]	; (800060c <main+0x32c>)
+ 8000462:	7952      	ldrb	r2, [r2, #5]
+ 8000464:	9201      	str	r2, [sp, #4]
+ 8000466:	9300      	str	r3, [sp, #0]
+ 8000468:	002b      	movs	r3, r5
+ 800046a:	0002      	movs	r2, r0
+ 800046c:	0020      	movs	r0, r4
+ 800046e:	f7ff fed7 	bl	8000220 <set_time>
+
+    formato_24_horas = !formato_24_horas; // Cambiar el formato
+ 8000472:	4b67      	ldr	r3, [pc, #412]	; (8000610 <main+0x330>)
+ 8000474:	781b      	ldrb	r3, [r3, #0]
+ 8000476:	425a      	negs	r2, r3
+ 8000478:	4153      	adcs	r3, r2
+ 800047a:	b2db      	uxtb	r3, r3
+ 800047c:	001a      	movs	r2, r3
+ 800047e:	4b64      	ldr	r3, [pc, #400]	; (8000610 <main+0x330>)
+ 8000480:	701a      	strb	r2, [r3, #0]
+
+    delay_ms(50); // Retardo para evitar rebotes o cambios rápidos
+ 8000482:	2032      	movs	r0, #50	; 0x32
+ 8000484:	f000 f992 	bl	80007ac <delay_ms>
+        //it increments the minutes in the watch structure and starts a 10-second countdown. It also
+        // performs debouncing by adding a delay of 100 milliseconds. If the units of minutes reach 10,
+        // it resets the units to 0 and increments the tens of minutes. If the tens of minutes reach 6,
+        // it resets the tens to 0.
+
+        if ((GPIOA->IDR & (1 << 0)) == 0) //  If the button connected to PA0 is pressed
+ 8000488:	23a0      	movs	r3, #160	; 0xa0
+ 800048a:	05db      	lsls	r3, r3, #23
+ 800048c:	691b      	ldr	r3, [r3, #16]
+ 800048e:	2201      	movs	r2, #1
+ 8000490:	4013      	ands	r3, r2
+ 8000492:	d11c      	bne.n	80004ce <main+0x1ee>
+        {
+            // increase minutes
+            watch.minute_unit++;
+ 8000494:	4b5d      	ldr	r3, [pc, #372]	; (800060c <main+0x32c>)
+ 8000496:	78db      	ldrb	r3, [r3, #3]
+ 8000498:	3301      	adds	r3, #1
+ 800049a:	b2da      	uxtb	r2, r3
+ 800049c:	4b5b      	ldr	r3, [pc, #364]	; (800060c <main+0x32c>)
+ 800049e:	70da      	strb	r2, [r3, #3]
+
+            
+            // Verificar si se necesita llevar a cabo un carry en los minutos
+            if (watch.minute_unit == 10)
+ 80004a0:	4b5a      	ldr	r3, [pc, #360]	; (800060c <main+0x32c>)
+ 80004a2:	78db      	ldrb	r3, [r3, #3]
+ 80004a4:	2b0a      	cmp	r3, #10
+ 80004a6:	d10f      	bne.n	80004c8 <main+0x1e8>
+            {
+                watch.minute_unit = 0; // Reiniciar las unidades de minuto a cero
+ 80004a8:	4b58      	ldr	r3, [pc, #352]	; (800060c <main+0x32c>)
+ 80004aa:	2200      	movs	r2, #0
+ 80004ac:	70da      	strb	r2, [r3, #3]
+                watch.minute_decimal++; // Incrementar las decenas de minuto
+ 80004ae:	4b57      	ldr	r3, [pc, #348]	; (800060c <main+0x32c>)
+ 80004b0:	789b      	ldrb	r3, [r3, #2]
+ 80004b2:	3301      	adds	r3, #1
+ 80004b4:	b2da      	uxtb	r2, r3
+ 80004b6:	4b55      	ldr	r3, [pc, #340]	; (800060c <main+0x32c>)
+ 80004b8:	709a      	strb	r2, [r3, #2]
+
+                // Verificar si se necesita llevar a cabo un carry en las decenas de minuto
+                if (watch.minute_decimal == 6)
+ 80004ba:	4b54      	ldr	r3, [pc, #336]	; (800060c <main+0x32c>)
+ 80004bc:	789b      	ldrb	r3, [r3, #2]
+ 80004be:	2b06      	cmp	r3, #6
+ 80004c0:	d102      	bne.n	80004c8 <main+0x1e8>
+                {
+                    watch.minute_decimal = 0; // Reiniciar las decenas de minuto a cero
+ 80004c2:	4b52      	ldr	r3, [pc, #328]	; (800060c <main+0x32c>)
+ 80004c4:	2200      	movs	r2, #0
+ 80004c6:	709a      	strb	r2, [r3, #2]
+                }
+            }
+
+           // Debounce delay
+            delay_ms(50);
+ 80004c8:	2032      	movs	r0, #50	; 0x32
+ 80004ca:	f000 f96f 	bl	80007ac <delay_ms>
+        }
+
+        if ((GPIOC->IDR & (1 << 3)) == 0) // If the button connected to PC3 is pressed
+ 80004ce:	4b48      	ldr	r3, [pc, #288]	; (80005f0 <main+0x310>)
+ 80004d0:	691b      	ldr	r3, [r3, #16]
+ 80004d2:	2208      	movs	r2, #8
+ 80004d4:	4013      	ands	r3, r2
+ 80004d6:	d11a      	bne.n	800050e <main+0x22e>
+        {
+            // Decrement the minutes
+            if (watch.minute_unit == 0) {
+ 80004d8:	4b4c      	ldr	r3, [pc, #304]	; (800060c <main+0x32c>)
+ 80004da:	78db      	ldrb	r3, [r3, #3]
+ 80004dc:	2b00      	cmp	r3, #0
+ 80004de:	d10d      	bne.n	80004fc <main+0x21c>
+            watch.minute_unit = 9; // If the units of minute is 0, set it to 9
+ 80004e0:	4b4a      	ldr	r3, [pc, #296]	; (800060c <main+0x32c>)
+ 80004e2:	2209      	movs	r2, #9
+ 80004e4:	70da      	strb	r2, [r3, #3]
+            if (watch.minute_decimal > 0) {
+ 80004e6:	4b49      	ldr	r3, [pc, #292]	; (800060c <main+0x32c>)
+ 80004e8:	789b      	ldrb	r3, [r3, #2]
+ 80004ea:	2b00      	cmp	r3, #0
+ 80004ec:	d00c      	beq.n	8000508 <main+0x228>
+            watch.minute_decimal--; // If the tens of minute is not 0, decrement it
+ 80004ee:	4b47      	ldr	r3, [pc, #284]	; (800060c <main+0x32c>)
+ 80004f0:	789b      	ldrb	r3, [r3, #2]
+ 80004f2:	3b01      	subs	r3, #1
+ 80004f4:	b2da      	uxtb	r2, r3
+ 80004f6:	4b45      	ldr	r3, [pc, #276]	; (800060c <main+0x32c>)
+ 80004f8:	709a      	strb	r2, [r3, #2]
+ 80004fa:	e005      	b.n	8000508 <main+0x228>
+            }
+        } else {
+        watch.minute_unit--; // If the units of minute is not 0, decrement it
+ 80004fc:	4b43      	ldr	r3, [pc, #268]	; (800060c <main+0x32c>)
+ 80004fe:	78db      	ldrb	r3, [r3, #3]
+ 8000500:	3b01      	subs	r3, #1
+ 8000502:	b2da      	uxtb	r2, r3
+ 8000504:	4b41      	ldr	r3, [pc, #260]	; (800060c <main+0x32c>)
+ 8000506:	70da      	strb	r2, [r3, #3]
+        }
+
+    // Debounce delay
+    delay_ms(50);
+ 8000508:	2032      	movs	r0, #50	; 0x32
+ 800050a:	f000 f94f 	bl	80007ac <delay_ms>
+        }
+    if ((GPIOC->IDR & (1 << 10)) == 0) // If the button connected to PC10 is pressed
+ 800050e:	4b38      	ldr	r3, [pc, #224]	; (80005f0 <main+0x310>)
+ 8000510:	691a      	ldr	r2, [r3, #16]
+ 8000512:	2380      	movs	r3, #128	; 0x80
+ 8000514:	00db      	lsls	r3, r3, #3
+ 8000516:	4013      	ands	r3, r2
+ 8000518:	d13a      	bne.n	8000590 <main+0x2b0>
+    {
+     // Increment the hours
+        watch.hour_unit++;
+ 800051a:	4b3c      	ldr	r3, [pc, #240]	; (800060c <main+0x32c>)
+ 800051c:	785b      	ldrb	r3, [r3, #1]
+ 800051e:	3301      	adds	r3, #1
+ 8000520:	b2da      	uxtb	r2, r3
+ 8000522:	4b3a      	ldr	r3, [pc, #232]	; (800060c <main+0x32c>)
+ 8000524:	705a      	strb	r2, [r3, #1]
+        if (watch.hour_unit == 10) {
+ 8000526:	4b39      	ldr	r3, [pc, #228]	; (800060c <main+0x32c>)
+ 8000528:	785b      	ldrb	r3, [r3, #1]
+ 800052a:	2b0a      	cmp	r3, #10
+ 800052c:	d11f      	bne.n	800056e <main+0x28e>
+        watch.hour_unit = 0;
+ 800052e:	4b37      	ldr	r3, [pc, #220]	; (800060c <main+0x32c>)
+ 8000530:	2200      	movs	r2, #0
+ 8000532:	705a      	strb	r2, [r3, #1]
+        watch.hour_decimal++;
+ 8000534:	4b35      	ldr	r3, [pc, #212]	; (800060c <main+0x32c>)
+ 8000536:	781b      	ldrb	r3, [r3, #0]
+ 8000538:	3301      	adds	r3, #1
+ 800053a:	b2da      	uxtb	r2, r3
+ 800053c:	4b33      	ldr	r3, [pc, #204]	; (800060c <main+0x32c>)
+ 800053e:	701a      	strb	r2, [r3, #0]
+            if (watch.hour_decimal == 2 && watch.hour_unit > 3) { // If the time is 24 hours
+ 8000540:	4b32      	ldr	r3, [pc, #200]	; (800060c <main+0x32c>)
+ 8000542:	781b      	ldrb	r3, [r3, #0]
+ 8000544:	2b02      	cmp	r3, #2
+ 8000546:	d10a      	bne.n	800055e <main+0x27e>
+ 8000548:	4b30      	ldr	r3, [pc, #192]	; (800060c <main+0x32c>)
+ 800054a:	785b      	ldrb	r3, [r3, #1]
+ 800054c:	2b03      	cmp	r3, #3
+ 800054e:	d906      	bls.n	800055e <main+0x27e>
+            watch.hour_decimal = 0;
+ 8000550:	4b2e      	ldr	r3, [pc, #184]	; (800060c <main+0x32c>)
+ 8000552:	2200      	movs	r2, #0
+ 8000554:	701a      	strb	r2, [r3, #0]
+            watch.hour_unit = 0;
+ 8000556:	4b2d      	ldr	r3, [pc, #180]	; (800060c <main+0x32c>)
+ 8000558:	2200      	movs	r2, #0
+ 800055a:	705a      	strb	r2, [r3, #1]
+ 800055c:	e015      	b.n	800058a <main+0x2aa>
+            } else if (watch.hour_decimal == 10) { // If the time is more than 24 hours
+ 800055e:	4b2b      	ldr	r3, [pc, #172]	; (800060c <main+0x32c>)
+ 8000560:	781b      	ldrb	r3, [r3, #0]
+ 8000562:	2b0a      	cmp	r3, #10
+ 8000564:	d111      	bne.n	800058a <main+0x2aa>
+            watch.hour_decimal = 0;
+ 8000566:	4b29      	ldr	r3, [pc, #164]	; (800060c <main+0x32c>)
+ 8000568:	2200      	movs	r2, #0
+ 800056a:	701a      	strb	r2, [r3, #0]
+ 800056c:	e00d      	b.n	800058a <main+0x2aa>
+            }
+        } else if (watch.hour_decimal == 2 && watch.hour_unit > 3) { // If the time is 24 hours
+ 800056e:	4b27      	ldr	r3, [pc, #156]	; (800060c <main+0x32c>)
+ 8000570:	781b      	ldrb	r3, [r3, #0]
+ 8000572:	2b02      	cmp	r3, #2
+ 8000574:	d109      	bne.n	800058a <main+0x2aa>
+ 8000576:	4b25      	ldr	r3, [pc, #148]	; (800060c <main+0x32c>)
+ 8000578:	785b      	ldrb	r3, [r3, #1]
+ 800057a:	2b03      	cmp	r3, #3
+ 800057c:	d905      	bls.n	800058a <main+0x2aa>
+        watch.hour_decimal = 0;
+ 800057e:	4b23      	ldr	r3, [pc, #140]	; (800060c <main+0x32c>)
+ 8000580:	2200      	movs	r2, #0
+ 8000582:	701a      	strb	r2, [r3, #0]
+        watch.hour_unit = 0;
+ 8000584:	4b21      	ldr	r3, [pc, #132]	; (800060c <main+0x32c>)
+ 8000586:	2200      	movs	r2, #0
+ 8000588:	705a      	strb	r2, [r3, #1]
+        }
+
+    // Debounce delay
+    delay_ms(100);
+ 800058a:	2064      	movs	r0, #100	; 0x64
+ 800058c:	f000 f90e 	bl	80007ac <delay_ms>
+    }
+    if ((GPIOC->IDR & (1 << 12)) == 0) // If the button connected to PC12 is pressed
+ 8000590:	4b17      	ldr	r3, [pc, #92]	; (80005f0 <main+0x310>)
+ 8000592:	691a      	ldr	r2, [r3, #16]
+ 8000594:	2380      	movs	r3, #128	; 0x80
+ 8000596:	015b      	lsls	r3, r3, #5
+ 8000598:	4013      	ands	r3, r2
+ 800059a:	d121      	bne.n	80005e0 <main+0x300>
+    {
+        // Decrement the hours
+        if (watch.hour_unit == 0) {
+ 800059c:	4b1b      	ldr	r3, [pc, #108]	; (800060c <main+0x32c>)
+ 800059e:	785b      	ldrb	r3, [r3, #1]
+ 80005a0:	2b00      	cmp	r3, #0
+ 80005a2:	d114      	bne.n	80005ce <main+0x2ee>
+        watch.hour_unit = 9;
+ 80005a4:	4b19      	ldr	r3, [pc, #100]	; (800060c <main+0x32c>)
+ 80005a6:	2209      	movs	r2, #9
+ 80005a8:	705a      	strb	r2, [r3, #1]
+            if (watch.hour_decimal > 0) {
+ 80005aa:	4b18      	ldr	r3, [pc, #96]	; (800060c <main+0x32c>)
+ 80005ac:	781b      	ldrb	r3, [r3, #0]
+ 80005ae:	2b00      	cmp	r3, #0
+ 80005b0:	d006      	beq.n	80005c0 <main+0x2e0>
+            watch.hour_decimal--;
+ 80005b2:	4b16      	ldr	r3, [pc, #88]	; (800060c <main+0x32c>)
+ 80005b4:	781b      	ldrb	r3, [r3, #0]
+ 80005b6:	3b01      	subs	r3, #1
+ 80005b8:	b2da      	uxtb	r2, r3
+ 80005ba:	4b14      	ldr	r3, [pc, #80]	; (800060c <main+0x32c>)
+ 80005bc:	701a      	strb	r2, [r3, #0]
+ 80005be:	e00c      	b.n	80005da <main+0x2fa>
+                } else {
+            watch.hour_decimal = 2;
+ 80005c0:	4b12      	ldr	r3, [pc, #72]	; (800060c <main+0x32c>)
+ 80005c2:	2202      	movs	r2, #2
+ 80005c4:	701a      	strb	r2, [r3, #0]
+            watch.hour_unit = 3;
+ 80005c6:	4b11      	ldr	r3, [pc, #68]	; (800060c <main+0x32c>)
+ 80005c8:	2203      	movs	r2, #3
+ 80005ca:	705a      	strb	r2, [r3, #1]
+ 80005cc:	e005      	b.n	80005da <main+0x2fa>
+                }
+            } else {
+            watch.hour_unit--;
+ 80005ce:	4b0f      	ldr	r3, [pc, #60]	; (800060c <main+0x32c>)
+ 80005d0:	785b      	ldrb	r3, [r3, #1]
+ 80005d2:	3b01      	subs	r3, #1
+ 80005d4:	b2da      	uxtb	r2, r3
+ 80005d6:	4b0d      	ldr	r3, [pc, #52]	; (800060c <main+0x32c>)
+ 80005d8:	705a      	strb	r2, [r3, #1]
+    }
+
+    // Debounce delay
+    delay_ms(100);
+ 80005da:	2064      	movs	r0, #100	; 0x64
+ 80005dc:	f000 f8e6 	bl	80007ac <delay_ms>
+}
+        // call the function to format the time
+        formato_hora();
+ 80005e0:	f000 f818 	bl	8000614 <formato_hora>
+        if ((GPIOA->IDR & (1 << 10)) == 0) 
+ 80005e4:	e6e5      	b.n	80003b2 <main+0xd2>
+ 80005e6:	46c0      	nop			; (mov r8, r8)
+ 80005e8:	40021000 	.word	0x40021000
+ 80005ec:	00055500 	.word	0x00055500
+ 80005f0:	50000800 	.word	0x50000800
+ 80005f4:	fff000ff 	.word	0xfff000ff
+ 80005f8:	00005555 	.word	0x00005555
+ 80005fc:	50000400 	.word	0x50000400
+ 8000600:	f3ffffff 	.word	0xf3ffffff
+ 8000604:	fcffffff 	.word	0xfcffffff
+ 8000608:	ffcfffff 	.word	0xffcfffff
+ 800060c:	2000006c 	.word	0x2000006c
+ 8000610:	20000000 	.word	0x20000000
+
+08000614 <formato_hora>:
+    }
+}
+void formato_hora()
+{
+ 8000614:	b580      	push	{r7, lr}
+ 8000616:	af00      	add	r7, sp, #0
+    // clear all the pins of the GPIOB and GPIOC
+    GPIOB->BSRR |= 0xFFFF0000; 
+ 8000618:	4b5d      	ldr	r3, [pc, #372]	; (8000790 <formato_hora+0x17c>)
+ 800061a:	699a      	ldr	r2, [r3, #24]
+ 800061c:	4b5c      	ldr	r3, [pc, #368]	; (8000790 <formato_hora+0x17c>)
+ 800061e:	495d      	ldr	r1, [pc, #372]	; (8000794 <formato_hora+0x180>)
+ 8000620:	430a      	orrs	r2, r1
+ 8000622:	619a      	str	r2, [r3, #24]
+    GPIOC->BSRR |= 0xFFFF0000;
+ 8000624:	4b5c      	ldr	r3, [pc, #368]	; (8000798 <formato_hora+0x184>)
+ 8000626:	699a      	ldr	r2, [r3, #24]
+ 8000628:	4b5b      	ldr	r3, [pc, #364]	; (8000798 <formato_hora+0x184>)
+ 800062a:	495a      	ldr	r1, [pc, #360]	; (8000794 <formato_hora+0x180>)
+ 800062c:	430a      	orrs	r2, r1
+ 800062e:	619a      	str	r2, [r3, #24]
+    
+    //Call the function to update the values of the states
+    actualizarValoresEstados();
+ 8000630:	f7ff fe2a 	bl	8000288 <actualizarValoresEstados>
+
+    // Update and display the time
+    if (watch_state < sizeof(estados) / sizeof(estados[0])) {
+ 8000634:	4b59      	ldr	r3, [pc, #356]	; (800079c <formato_hora+0x188>)
+ 8000636:	781b      	ldrb	r3, [r3, #0]
+ 8000638:	2b05      	cmp	r3, #5
+ 800063a:	d838      	bhi.n	80006ae <formato_hora+0x9a>
+            GPIOC->BSRR |= estados[watch_state].segmento; // Encender segmento correspondiente
+ 800063c:	4b56      	ldr	r3, [pc, #344]	; (8000798 <formato_hora+0x184>)
+ 800063e:	6999      	ldr	r1, [r3, #24]
+ 8000640:	4b56      	ldr	r3, [pc, #344]	; (800079c <formato_hora+0x188>)
+ 8000642:	781b      	ldrb	r3, [r3, #0]
+ 8000644:	0018      	movs	r0, r3
+ 8000646:	4a56      	ldr	r2, [pc, #344]	; (80007a0 <formato_hora+0x18c>)
+ 8000648:	0003      	movs	r3, r0
+ 800064a:	005b      	lsls	r3, r3, #1
+ 800064c:	181b      	adds	r3, r3, r0
+ 800064e:	009b      	lsls	r3, r3, #2
+ 8000650:	589a      	ldr	r2, [r3, r2]
+ 8000652:	4b51      	ldr	r3, [pc, #324]	; (8000798 <formato_hora+0x184>)
+ 8000654:	430a      	orrs	r2, r1
+ 8000656:	619a      	str	r2, [r3, #24]
+            GPIOB->BSRR |= estados[watch_state].decoderFunction(estados[watch_state].valor); // Encender el dígito
+ 8000658:	4b50      	ldr	r3, [pc, #320]	; (800079c <formato_hora+0x188>)
+ 800065a:	781b      	ldrb	r3, [r3, #0]
+ 800065c:	0019      	movs	r1, r3
+ 800065e:	4a50      	ldr	r2, [pc, #320]	; (80007a0 <formato_hora+0x18c>)
+ 8000660:	000b      	movs	r3, r1
+ 8000662:	005b      	lsls	r3, r3, #1
+ 8000664:	185b      	adds	r3, r3, r1
+ 8000666:	009b      	lsls	r3, r3, #2
+ 8000668:	18d3      	adds	r3, r2, r3
+ 800066a:	3304      	adds	r3, #4
+ 800066c:	681a      	ldr	r2, [r3, #0]
+ 800066e:	4b4b      	ldr	r3, [pc, #300]	; (800079c <formato_hora+0x188>)
+ 8000670:	781b      	ldrb	r3, [r3, #0]
+ 8000672:	0018      	movs	r0, r3
+ 8000674:	494a      	ldr	r1, [pc, #296]	; (80007a0 <formato_hora+0x18c>)
+ 8000676:	0003      	movs	r3, r0
+ 8000678:	005b      	lsls	r3, r3, #1
+ 800067a:	181b      	adds	r3, r3, r0
+ 800067c:	009b      	lsls	r3, r3, #2
+ 800067e:	18cb      	adds	r3, r1, r3
+ 8000680:	3308      	adds	r3, #8
+ 8000682:	781b      	ldrb	r3, [r3, #0]
+ 8000684:	0018      	movs	r0, r3
+ 8000686:	4790      	blx	r2
+ 8000688:	0003      	movs	r3, r0
+ 800068a:	0019      	movs	r1, r3
+ 800068c:	4b40      	ldr	r3, [pc, #256]	; (8000790 <formato_hora+0x17c>)
+ 800068e:	699a      	ldr	r2, [r3, #24]
+ 8000690:	4b3f      	ldr	r3, [pc, #252]	; (8000790 <formato_hora+0x17c>)
+ 8000692:	430a      	orrs	r2, r1
+ 8000694:	619a      	str	r2, [r3, #24]
+            watch_state = (watch_state + 1) % (sizeof(estados) / sizeof(estados[0])); // Avanzar al siguiente estado cíclicamente
+ 8000696:	4b41      	ldr	r3, [pc, #260]	; (800079c <formato_hora+0x188>)
+ 8000698:	781b      	ldrb	r3, [r3, #0]
+ 800069a:	3301      	adds	r3, #1
+ 800069c:	2106      	movs	r1, #6
+ 800069e:	0018      	movs	r0, r3
+ 80006a0:	f7ff fdb8 	bl	8000214 <__aeabi_uidivmod>
+ 80006a4:	000b      	movs	r3, r1
+ 80006a6:	b2da      	uxtb	r2, r3
+ 80006a8:	4b3c      	ldr	r3, [pc, #240]	; (800079c <formato_hora+0x188>)
+ 80006aa:	701a      	strb	r2, [r3, #0]
+ 80006ac:	e002      	b.n	80006b4 <formato_hora+0xa0>
+        } else {
+            watch_state = 0; // Reiniciar al estado inicial si se supera el número de estados
+ 80006ae:	4b3b      	ldr	r3, [pc, #236]	; (800079c <formato_hora+0x188>)
+ 80006b0:	2200      	movs	r2, #0
+ 80006b2:	701a      	strb	r2, [r3, #0]
+        }
+
+    delay_ms(1);
+ 80006b4:	2001      	movs	r0, #1
+ 80006b6:	f000 f879 	bl	80007ac <delay_ms>
+    inc_second++;
+ 80006ba:	4b3a      	ldr	r3, [pc, #232]	; (80007a4 <formato_hora+0x190>)
+ 80006bc:	781b      	ldrb	r3, [r3, #0]
+ 80006be:	3301      	adds	r3, #1
+ 80006c0:	b2da      	uxtb	r2, r3
+ 80006c2:	4b38      	ldr	r3, [pc, #224]	; (80007a4 <formato_hora+0x190>)
+ 80006c4:	701a      	strb	r2, [r3, #0]
+    
+// Increment the second counter
+inc_second++;
+ 80006c6:	4b37      	ldr	r3, [pc, #220]	; (80007a4 <formato_hora+0x190>)
+ 80006c8:	781b      	ldrb	r3, [r3, #0]
+ 80006ca:	3301      	adds	r3, #1
+ 80006cc:	b2da      	uxtb	r2, r3
+ 80006ce:	4b35      	ldr	r3, [pc, #212]	; (80007a4 <formato_hora+0x190>)
+ 80006d0:	701a      	strb	r2, [r3, #0]
+
+// Check if a second has passed
+if (inc_second >= 225) { // Assuming 1000 milliseconds for 1 second
+ 80006d2:	4b34      	ldr	r3, [pc, #208]	; (80007a4 <formato_hora+0x190>)
+ 80006d4:	781b      	ldrb	r3, [r3, #0]
+ 80006d6:	2be0      	cmp	r3, #224	; 0xe0
+ 80006d8:	d957      	bls.n	800078a <formato_hora+0x176>
+    inc_second = 0;
+ 80006da:	4b32      	ldr	r3, [pc, #200]	; (80007a4 <formato_hora+0x190>)
+ 80006dc:	2200      	movs	r2, #0
+ 80006de:	701a      	strb	r2, [r3, #0]
+
+    // Increment the units of seconds
+    watch.second_unit++;
+ 80006e0:	4b31      	ldr	r3, [pc, #196]	; (80007a8 <formato_hora+0x194>)
+ 80006e2:	795b      	ldrb	r3, [r3, #5]
+ 80006e4:	3301      	adds	r3, #1
+ 80006e6:	b2da      	uxtb	r2, r3
+ 80006e8:	4b2f      	ldr	r3, [pc, #188]	; (80007a8 <formato_hora+0x194>)
+ 80006ea:	715a      	strb	r2, [r3, #5]
+    if (watch.second_unit >= 10) {
+ 80006ec:	4b2e      	ldr	r3, [pc, #184]	; (80007a8 <formato_hora+0x194>)
+ 80006ee:	795b      	ldrb	r3, [r3, #5]
+ 80006f0:	2b09      	cmp	r3, #9
+ 80006f2:	d94a      	bls.n	800078a <formato_hora+0x176>
+        watch.second_unit = 0;
+ 80006f4:	4b2c      	ldr	r3, [pc, #176]	; (80007a8 <formato_hora+0x194>)
+ 80006f6:	2200      	movs	r2, #0
+ 80006f8:	715a      	strb	r2, [r3, #5]
+
+        // Increment the tens of seconds
+        watch.second_decimal++;
+ 80006fa:	4b2b      	ldr	r3, [pc, #172]	; (80007a8 <formato_hora+0x194>)
+ 80006fc:	791b      	ldrb	r3, [r3, #4]
+ 80006fe:	3301      	adds	r3, #1
+ 8000700:	b2da      	uxtb	r2, r3
+ 8000702:	4b29      	ldr	r3, [pc, #164]	; (80007a8 <formato_hora+0x194>)
+ 8000704:	711a      	strb	r2, [r3, #4]
+        if (watch.second_decimal >= 6) {
+ 8000706:	4b28      	ldr	r3, [pc, #160]	; (80007a8 <formato_hora+0x194>)
+ 8000708:	791b      	ldrb	r3, [r3, #4]
+ 800070a:	2b05      	cmp	r3, #5
+ 800070c:	d93d      	bls.n	800078a <formato_hora+0x176>
+            watch.second_decimal = 0;
+ 800070e:	4b26      	ldr	r3, [pc, #152]	; (80007a8 <formato_hora+0x194>)
+ 8000710:	2200      	movs	r2, #0
+ 8000712:	711a      	strb	r2, [r3, #4]
+
+            // Increment the units of minutes
+            watch.minute_unit++;
+ 8000714:	4b24      	ldr	r3, [pc, #144]	; (80007a8 <formato_hora+0x194>)
+ 8000716:	78db      	ldrb	r3, [r3, #3]
+ 8000718:	3301      	adds	r3, #1
+ 800071a:	b2da      	uxtb	r2, r3
+ 800071c:	4b22      	ldr	r3, [pc, #136]	; (80007a8 <formato_hora+0x194>)
+ 800071e:	70da      	strb	r2, [r3, #3]
+            if (watch.minute_unit >= 10) {
+ 8000720:	4b21      	ldr	r3, [pc, #132]	; (80007a8 <formato_hora+0x194>)
+ 8000722:	78db      	ldrb	r3, [r3, #3]
+ 8000724:	2b09      	cmp	r3, #9
+ 8000726:	d930      	bls.n	800078a <formato_hora+0x176>
+                watch.minute_unit = 0;
+ 8000728:	4b1f      	ldr	r3, [pc, #124]	; (80007a8 <formato_hora+0x194>)
+ 800072a:	2200      	movs	r2, #0
+ 800072c:	70da      	strb	r2, [r3, #3]
+
+                // Increment the tens of minutes
+                watch.minute_decimal++;
+ 800072e:	4b1e      	ldr	r3, [pc, #120]	; (80007a8 <formato_hora+0x194>)
+ 8000730:	789b      	ldrb	r3, [r3, #2]
+ 8000732:	3301      	adds	r3, #1
+ 8000734:	b2da      	uxtb	r2, r3
+ 8000736:	4b1c      	ldr	r3, [pc, #112]	; (80007a8 <formato_hora+0x194>)
+ 8000738:	709a      	strb	r2, [r3, #2]
+                if (watch.minute_decimal >= 6) {
+ 800073a:	4b1b      	ldr	r3, [pc, #108]	; (80007a8 <formato_hora+0x194>)
+ 800073c:	789b      	ldrb	r3, [r3, #2]
+ 800073e:	2b05      	cmp	r3, #5
+ 8000740:	d923      	bls.n	800078a <formato_hora+0x176>
+                    watch.minute_decimal = 0;
+ 8000742:	4b19      	ldr	r3, [pc, #100]	; (80007a8 <formato_hora+0x194>)
+ 8000744:	2200      	movs	r2, #0
+ 8000746:	709a      	strb	r2, [r3, #2]
+
+                    // Increment the units of hours
+                    watch.hour_unit++;
+ 8000748:	4b17      	ldr	r3, [pc, #92]	; (80007a8 <formato_hora+0x194>)
+ 800074a:	785b      	ldrb	r3, [r3, #1]
+ 800074c:	3301      	adds	r3, #1
+ 800074e:	b2da      	uxtb	r2, r3
+ 8000750:	4b15      	ldr	r3, [pc, #84]	; (80007a8 <formato_hora+0x194>)
+ 8000752:	705a      	strb	r2, [r3, #1]
+                    if (watch.hour_unit >= 10) {
+ 8000754:	4b14      	ldr	r3, [pc, #80]	; (80007a8 <formato_hora+0x194>)
+ 8000756:	785b      	ldrb	r3, [r3, #1]
+ 8000758:	2b09      	cmp	r3, #9
+ 800075a:	d908      	bls.n	800076e <formato_hora+0x15a>
+                        watch.hour_unit = 0;
+ 800075c:	4b12      	ldr	r3, [pc, #72]	; (80007a8 <formato_hora+0x194>)
+ 800075e:	2200      	movs	r2, #0
+ 8000760:	705a      	strb	r2, [r3, #1]
+
+                        // Increment the tens of hours
+                        watch.hour_decimal++;
+ 8000762:	4b11      	ldr	r3, [pc, #68]	; (80007a8 <formato_hora+0x194>)
+ 8000764:	781b      	ldrb	r3, [r3, #0]
+ 8000766:	3301      	adds	r3, #1
+ 8000768:	b2da      	uxtb	r2, r3
+ 800076a:	4b0f      	ldr	r3, [pc, #60]	; (80007a8 <formato_hora+0x194>)
+ 800076c:	701a      	strb	r2, [r3, #0]
+                    }
+
+                    // Check if the hour format is 24 hours and adjust accordingly
+                    if (watch.hour_decimal >= 2 && watch.hour_unit >= 4) {
+ 800076e:	4b0e      	ldr	r3, [pc, #56]	; (80007a8 <formato_hora+0x194>)
+ 8000770:	781b      	ldrb	r3, [r3, #0]
+ 8000772:	2b01      	cmp	r3, #1
+ 8000774:	d909      	bls.n	800078a <formato_hora+0x176>
+ 8000776:	4b0c      	ldr	r3, [pc, #48]	; (80007a8 <formato_hora+0x194>)
+ 8000778:	785b      	ldrb	r3, [r3, #1]
+ 800077a:	2b03      	cmp	r3, #3
+ 800077c:	d905      	bls.n	800078a <formato_hora+0x176>
+                        watch.hour_decimal = 0;
+ 800077e:	4b0a      	ldr	r3, [pc, #40]	; (80007a8 <formato_hora+0x194>)
+ 8000780:	2200      	movs	r2, #0
+ 8000782:	701a      	strb	r2, [r3, #0]
+                        watch.hour_unit = 0;
+ 8000784:	4b08      	ldr	r3, [pc, #32]	; (80007a8 <formato_hora+0x194>)
+ 8000786:	2200      	movs	r2, #0
+ 8000788:	705a      	strb	r2, [r3, #1]
+            }
+        }
+    }
+}
+
+}
+ 800078a:	46c0      	nop			; (mov r8, r8)
+ 800078c:	46bd      	mov	sp, r7
+ 800078e:	bd80      	pop	{r7, pc}
+ 8000790:	50000400 	.word	0x50000400
+ 8000794:	ffff0000 	.word	0xffff0000
+ 8000798:	50000800 	.word	0x50000800
+ 800079c:	20000068 	.word	0x20000068
+ 80007a0:	20000004 	.word	0x20000004
+ 80007a4:	20000069 	.word	0x20000069
+ 80007a8:	2000006c 	.word	0x2000006c
+
+080007ac <delay_ms>:
+
+void delay_ms(uint16_t n) {
+ 80007ac:	b580      	push	{r7, lr}
+ 80007ae:	b084      	sub	sp, #16
+ 80007b0:	af00      	add	r7, sp, #0
+ 80007b2:	0002      	movs	r2, r0
+ 80007b4:	1dbb      	adds	r3, r7, #6
+ 80007b6:	801a      	strh	r2, [r3, #0]
+    uint16_t i;
+    for (; n > 0; n--)
+ 80007b8:	e014      	b.n	80007e4 <delay_ms+0x38>
+        for (i = 0; i < 250; i++)
+ 80007ba:	230e      	movs	r3, #14
+ 80007bc:	18fb      	adds	r3, r7, r3
+ 80007be:	2200      	movs	r2, #0
+ 80007c0:	801a      	strh	r2, [r3, #0]
+ 80007c2:	e005      	b.n	80007d0 <delay_ms+0x24>
+ 80007c4:	210e      	movs	r1, #14
+ 80007c6:	187b      	adds	r3, r7, r1
+ 80007c8:	881a      	ldrh	r2, [r3, #0]
+ 80007ca:	187b      	adds	r3, r7, r1
+ 80007cc:	3201      	adds	r2, #1
+ 80007ce:	801a      	strh	r2, [r3, #0]
+ 80007d0:	230e      	movs	r3, #14
+ 80007d2:	18fb      	adds	r3, r7, r3
+ 80007d4:	881b      	ldrh	r3, [r3, #0]
+ 80007d6:	2bf9      	cmp	r3, #249	; 0xf9
+ 80007d8:	d9f4      	bls.n	80007c4 <delay_ms+0x18>
+    for (; n > 0; n--)
+ 80007da:	1dbb      	adds	r3, r7, #6
+ 80007dc:	881a      	ldrh	r2, [r3, #0]
+ 80007de:	1dbb      	adds	r3, r7, #6
+ 80007e0:	3a01      	subs	r2, #1
+ 80007e2:	801a      	strh	r2, [r3, #0]
+ 80007e4:	1dbb      	adds	r3, r7, #6
+ 80007e6:	881b      	ldrh	r3, [r3, #0]
+ 80007e8:	2b00      	cmp	r3, #0
+ 80007ea:	d1e6      	bne.n	80007ba <delay_ms+0xe>
+            ;
+}
+ 80007ec:	46c0      	nop			; (mov r8, r8)
+ 80007ee:	46c0      	nop			; (mov r8, r8)
+ 80007f0:	46bd      	mov	sp, r7
+ 80007f2:	b004      	add	sp, #16
+ 80007f4:	bd80      	pop	{r7, pc}
+	...
+
+080007f8 <decoder>:
+
+uint8_t decoder(uint8_t value_to_decode)
+{
+ 80007f8:	b580      	push	{r7, lr}
+ 80007fa:	b082      	sub	sp, #8
+ 80007fc:	af00      	add	r7, sp, #0
+ 80007fe:	0002      	movs	r2, r0
+ 8000800:	1dfb      	adds	r3, r7, #7
+ 8000802:	701a      	strb	r2, [r3, #0]
+    if (value_to_decode < 10)
+ 8000804:	1dfb      	adds	r3, r7, #7
+ 8000806:	781b      	ldrb	r3, [r3, #0]
+ 8000808:	2b09      	cmp	r3, #9
+ 800080a:	d804      	bhi.n	8000816 <decoder+0x1e>
+    {
+        return decoder_table[value_to_decode];
+ 800080c:	1dfb      	adds	r3, r7, #7
+ 800080e:	781b      	ldrb	r3, [r3, #0]
+ 8000810:	4a03      	ldr	r2, [pc, #12]	; (8000820 <decoder+0x28>)
+ 8000812:	5cd3      	ldrb	r3, [r2, r3]
+ 8000814:	e000      	b.n	8000818 <decoder+0x20>
+    }
+    else
+    {
+        return 0;
+ 8000816:	2300      	movs	r3, #0
+    }
+}
+ 8000818:	0018      	movs	r0, r3
+ 800081a:	46bd      	mov	sp, r7
+ 800081c:	b002      	add	sp, #8
+ 800081e:	bd80      	pop	{r7, pc}
+ 8000820:	080008d8 	.word	0x080008d8
+
+08000824 <Reset_Handler>:
+
+  .section .text.Reset_Handler
+  .weak Reset_Handler
+  .type Reset_Handler, %function
+Reset_Handler:
+  ldr   r0, =_estack
+ 8000824:	480d      	ldr	r0, [pc, #52]	; (800085c <LoopForever+0x2>)
+  mov   sp, r0          /* set stack pointer */
+ 8000826:	4685      	mov	sp, r0
+/* Call the clock system initialization function.*/
+  bl  SystemInit
+ 8000828:	e000      	b.n	800082c <Reset_Handler+0x8>
+ 800082a:	bf00      	nop
+
+/* Copy the data segment initializers from flash to SRAM */
+  ldr r0, =_sdata
+ 800082c:	480c      	ldr	r0, [pc, #48]	; (8000860 <LoopForever+0x6>)
+  ldr r1, =_edata
+ 800082e:	490d      	ldr	r1, [pc, #52]	; (8000864 <LoopForever+0xa>)
+  ldr r2, =_sidata
+ 8000830:	4a0d      	ldr	r2, [pc, #52]	; (8000868 <LoopForever+0xe>)
+  movs r3, #0
+ 8000832:	2300      	movs	r3, #0
+  b LoopCopyDataInit
+ 8000834:	e002      	b.n	800083c <LoopCopyDataInit>
+
+08000836 <CopyDataInit>:
+
+CopyDataInit:
+  ldr r4, [r2, r3]
+ 8000836:	58d4      	ldr	r4, [r2, r3]
+  str r4, [r0, r3]
+ 8000838:	50c4      	str	r4, [r0, r3]
+  adds r3, r3, #4
+ 800083a:	3304      	adds	r3, #4
+
+0800083c <LoopCopyDataInit>:
+
+LoopCopyDataInit:
+  adds r4, r0, r3
+ 800083c:	18c4      	adds	r4, r0, r3
+  cmp r4, r1
+ 800083e:	428c      	cmp	r4, r1
+  bcc CopyDataInit
+ 8000840:	d3f9      	bcc.n	8000836 <CopyDataInit>
+
+/* Zero fill the bss segment. */
+  ldr r2, =_sbss
+ 8000842:	4a0a      	ldr	r2, [pc, #40]	; (800086c <LoopForever+0x12>)
+  ldr r4, =_ebss
+ 8000844:	4c0a      	ldr	r4, [pc, #40]	; (8000870 <LoopForever+0x16>)
+  movs r3, #0
+ 8000846:	2300      	movs	r3, #0
+  b LoopFillZerobss
+ 8000848:	e001      	b.n	800084e <LoopFillZerobss>
+
+0800084a <FillZerobss>:
+
+FillZerobss:
+  str  r3, [r2]
+ 800084a:	6013      	str	r3, [r2, #0]
+  adds r2, r2, #4
+ 800084c:	3204      	adds	r2, #4
+
+0800084e <LoopFillZerobss>:
+
+LoopFillZerobss:
+  cmp r2, r4
+ 800084e:	42a2      	cmp	r2, r4
+  bcc FillZerobss
+ 8000850:	d3fb      	bcc.n	800084a <FillZerobss>
+
+/* Call static constructors */
+  bl __libc_init_array
+ 8000852:	f000 f811 	bl	8000878 <__libc_init_array>
+/* Call the application's entry point.*/
+  bl main
+ 8000856:	f7ff fd43 	bl	80002e0 <main>
+
+0800085a <LoopForever>:
+
+LoopForever:
+  b LoopForever
+ 800085a:	e7fe      	b.n	800085a <LoopForever>
+  ldr   r0, =_estack
+ 800085c:	20002000 	.word	0x20002000
+  ldr r0, =_sdata
+ 8000860:	20000000 	.word	0x20000000
+  ldr r1, =_edata
+ 8000864:	2000004c 	.word	0x2000004c
+  ldr r2, =_sidata
+ 8000868:	080008ec 	.word	0x080008ec
+  ldr r2, =_sbss
+ 800086c:	2000004c 	.word	0x2000004c
+  ldr r4, =_ebss
+ 8000870:	20000074 	.word	0x20000074
+
+08000874 <ADC_COMP_IRQHandler>:
+ * @retval : None
+*/
+  .section .text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+  b Infinite_Loop
+ 8000874:	e7fe      	b.n	8000874 <ADC_COMP_IRQHandler>
+	...
+
+08000878 <__libc_init_array>:
+ 8000878:	b570      	push	{r4, r5, r6, lr}
+ 800087a:	2600      	movs	r6, #0
+ 800087c:	4c0c      	ldr	r4, [pc, #48]	; (80008b0 <__libc_init_array+0x38>)
+ 800087e:	4d0d      	ldr	r5, [pc, #52]	; (80008b4 <__libc_init_array+0x3c>)
+ 8000880:	1b64      	subs	r4, r4, r5
+ 8000882:	10a4      	asrs	r4, r4, #2
+ 8000884:	42a6      	cmp	r6, r4
+ 8000886:	d109      	bne.n	800089c <__libc_init_array+0x24>
+ 8000888:	2600      	movs	r6, #0
+ 800088a:	f000 f819 	bl	80008c0 <_init>
+ 800088e:	4c0a      	ldr	r4, [pc, #40]	; (80008b8 <__libc_init_array+0x40>)
+ 8000890:	4d0a      	ldr	r5, [pc, #40]	; (80008bc <__libc_init_array+0x44>)
+ 8000892:	1b64      	subs	r4, r4, r5
+ 8000894:	10a4      	asrs	r4, r4, #2
+ 8000896:	42a6      	cmp	r6, r4
+ 8000898:	d105      	bne.n	80008a6 <__libc_init_array+0x2e>
+ 800089a:	bd70      	pop	{r4, r5, r6, pc}
+ 800089c:	00b3      	lsls	r3, r6, #2
+ 800089e:	58eb      	ldr	r3, [r5, r3]
+ 80008a0:	4798      	blx	r3
+ 80008a2:	3601      	adds	r6, #1
+ 80008a4:	e7ee      	b.n	8000884 <__libc_init_array+0xc>
+ 80008a6:	00b3      	lsls	r3, r6, #2
+ 80008a8:	58eb      	ldr	r3, [r5, r3]
+ 80008aa:	4798      	blx	r3
+ 80008ac:	3601      	adds	r6, #1
+ 80008ae:	e7f2      	b.n	8000896 <__libc_init_array+0x1e>
+ 80008b0:	080008e4 	.word	0x080008e4
+ 80008b4:	080008e4 	.word	0x080008e4
+ 80008b8:	080008e8 	.word	0x080008e8
+ 80008bc:	080008e4 	.word	0x080008e4
+
+080008c0 <_init>:
+ 80008c0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80008c2:	46c0      	nop			; (mov r8, r8)
+ 80008c4:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80008c6:	bc08      	pop	{r3}
+ 80008c8:	469e      	mov	lr, r3
+ 80008ca:	4770      	bx	lr
+
+080008cc <_fini>:
+ 80008cc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80008ce:	46c0      	nop			; (mov r8, r8)
+ 80008d0:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80008d2:	bc08      	pop	{r3}
+ 80008d4:	469e      	mov	lr, r3
+ 80008d6:	4770      	bx	lr
